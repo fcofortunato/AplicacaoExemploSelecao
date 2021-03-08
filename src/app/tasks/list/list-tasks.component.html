@@ -1,0 +1,77 @@
+<h1 class="text-center text-primary">Lista de Tarefas</h1>
+
+<div class="campo-pesquisa">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Pesquisar:</label>
+    <div class="col-sm-10">
+      <input class="form-control" (keyup)="searchByString($event)" />
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col" class="text-center">Número</th>
+      <th scope="col" class="text-center">Título</th>
+      <th scope="col" class="text-center">Responsável</th>
+      <th scope="col" class="text-center">
+        <a
+          [routerLink]="['/tarefas/cadastrar']"
+          class="btn btn-outline-success btn-sm"
+        >
+          <span><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+          Novo
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <ng-container *ngIf="task.status !== 'Completo'">
+        <td class="text-center">
+          {{ task.id }}
+        </td>
+        <td class="text-center">
+          {{ task.title }}
+        </td>
+        <td class="text-center">
+          {{ task.assign }}
+        </td>
+        <td class="btn-acoes">
+          <a
+            href="#"
+            title="Editar"
+            [routerLink]="['/tarefas/editar', task.id]"
+            class="btn btn-outline-info btn-sm"
+          >
+            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+            Editar
+          </a>
+          &nbsp;
+          <a
+            href="#"
+            title="Remover"
+            (click)="remove($event, task)"
+            class="btn btn-outline-danger btn-sm"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Excluir
+          </a>
+          &nbsp;
+          <a
+            href="#"
+            title="Concluir"
+            (click)="completed($event, task)"
+            class="btn btn-outline-success btn-sm"
+          >
+            <i class="fa fa-check" aria-hidden="true"></i>
+            Concluir
+          </a>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+
+<p class="text-center" *ngIf="tasks.length == 0">Nenhuma tarefa cadastrada.</p>

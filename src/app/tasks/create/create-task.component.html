@@ -1,0 +1,94 @@
+<h1 class="text-center text-success">Cadastrar Tarefa</h1>
+
+<div class="card">
+  <div class="card-body">
+    <form #formTarefa="ngForm">
+      <div class="form-group">
+        <div>
+          <label>Título:</label>
+          <input
+            [ngClass]="!isValidForm && task.title === '' ? 'border-danger' : ''"
+            class="form-control"
+            type="text"
+            name="title"
+            required
+            [(ngModel)]="task.title"
+          />
+        </div>
+        <div class="mt-2">
+          <label>Descrição:</label>
+          <textarea
+            [ngClass]="
+              !isValidForm && task.description === '' ? 'border-danger' : ''
+            "
+            class="form-control"
+            required
+            name="description"
+            [(ngModel)]="task.description"
+          ></textarea>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <label>Responsável:</label>
+            <select
+              class="form-control"
+              required
+              name="assign"
+              [(ngModel)]="task.assign"
+            >
+              <option value="Master" selected>Master</option>
+              <option value="Junior">Junior</option>
+              <option value="ESIG">ESIG</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label>Prioridade:</label>
+            <select
+              class="form-control"
+              required
+              name="priority"
+              [(ngModel)]="task.priority"
+            >
+              <option value="Alta" selected>Alta</option>
+              <option value="Medio">Medio</option>
+              <option value="Baixo">Baixo</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <label>Deadline:</label>
+            <input
+              [ngClass]="
+                !isValidForm && task.deadline === null ? 'border-danger' : ''
+              "
+              class="form-control"
+              type="date"
+              name="deadline"
+              required
+              [(ngModel)]="task.deadline"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button
+          type="submit"
+          class="btn btn-outline-success"
+          (click)="create()"
+          value="Cadastrar"
+        >
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          Cadastrar
+        </button>
+        &nbsp;
+        <a [routerLink]="['/tarefas/listar']" class="btn btn-outline-dark">
+          <span aria-hidden="true">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            Voltar
+          </span>
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
